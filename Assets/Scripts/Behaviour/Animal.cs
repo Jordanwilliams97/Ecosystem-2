@@ -198,10 +198,11 @@ public class Animal : LivingEntity {
     void HandleInteractions () {
         if (currentAction == CreatureAction.Eating) {
             if (foodTarget && hunger > 0) {
-                float eatAmount = Mathf.Min (hunger, Time.deltaTime * 1 / eatDuration);
-                eatAmount = ((Plant) foodTarget).Consume (eatAmount);
-                hunger -= eatAmount;
-            }
+                    float eatAmount = Mathf.Min (hunger, Time.deltaTime * 1 / eatDuration);
+                    eatAmount = ((Plant) foodTarget).Consume (eatAmount);
+                    hunger -= eatAmount;
+                }
+
         } else if (currentAction == CreatureAction.Drinking) {
             if (thirst > 0) {
                 thirst -= Time.deltaTime * 1 / drinkDuration;
@@ -218,7 +219,7 @@ public class Animal : LivingEntity {
 
         // Finished moving
         if (moveTime >= 1) {
-            Environment.RegisterMove (this, coord, moveTargetCoord);
+            Environment.RegisterMove (this, moveFromCoord, moveTargetCoord);
             coord = moveTargetCoord;
 
             animatingMovement = false;
